@@ -28,15 +28,18 @@
        actif — sinon bandes blanches sur iPhone (volée 34c). */
     (function () {
       var t = null;
-      try { t = JSON.parse(localStorage.getItem("mm_theme") || "null"); } catch (e) {}
+      var raw = localStorage.getItem("mm_theme");
+      try { t = JSON.parse(raw || "null"); } catch (e) { t = raw; }
       var dark = t === "dark" || (t !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-      var bg = dark ? "#010C0C" : "#F7F9F9";
+      var bg = dark ? "#0A0E0D" : "#F4F2EE";
       document.documentElement.style.background = bg;
-      document.body.style.background = bg;
+      var paintBody = function () { if (document.body) document.body.style.background = bg; };
+      if (document.body) paintBody();
+      else document.addEventListener("DOMContentLoaded", paintBody, { once: true });
     })();
   </script>
-  <meta name="theme-color" content="#010C0C" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#F7F9F9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0A0E0D" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)" />
 </head>
 
   <body>
