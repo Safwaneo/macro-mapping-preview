@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
     <title>Macro Mapping</title>
     <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
@@ -23,7 +23,21 @@
         flex: 1;
       }
     </style>
-  <link rel="icon" href="/macro-mapping-preview/favicon.ico"/></head>
+  <link rel="icon" href="/macro-mapping-preview/favicon.ico"/><script>
+    /* Fond des zones hors-app (notch / home indicator / overscroll) = thème
+       actif — sinon bandes blanches sur iPhone (volée 34c). */
+    (function () {
+      var t = null;
+      try { t = JSON.parse(localStorage.getItem("mm_theme") || "null"); } catch (e) {}
+      var dark = t === "dark" || (t !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      var bg = dark ? "#010C0C" : "#F7F9F9";
+      document.documentElement.style.background = bg;
+      document.body.style.background = bg;
+    })();
+  </script>
+  <meta name="theme-color" content="#010C0C" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F9F9" media="(prefers-color-scheme: light)" />
+</head>
 
   <body>
     <!-- Use static rendering with Expo Router to support running without JavaScript. -->
@@ -32,6 +46,6 @@
     </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="/macro-mapping-preview/_expo/static/js/web/__expo-metro-runtime-1f8f5d3ca6b7f58204d51e14506d73fb.js" defer></script><script src="/macro-mapping-preview/_expo/static/js/web/__common-d60f74f3616b3c609031c87f84d6de4b.js" defer></script><script src="/macro-mapping-preview/_expo/static/js/web/entry-60f103ac0cb5741f2d2304586a213b2f.js" defer></script>
+  <script src="/macro-mapping-preview/_expo/static/js/web/__expo-metro-runtime-1f8f5d3ca6b7f58204d51e14506d73fb.js" defer></script><script src="/macro-mapping-preview/_expo/static/js/web/__common-601a81c81128806242b451dd11886448.js" defer></script><script src="/macro-mapping-preview/_expo/static/js/web/entry-e77d8b9d028f58b979956f14240d7398.js" defer></script>
 </body>
 </html>
